@@ -23,7 +23,8 @@ class MyComponent extends Component {
     }
 
     render() {
-        let children = this.props.children;
+        // let children = this.props.children;
+        let {children} = this.props;
 
         return (
             <div className="my-component" ref="myComponentDiv">

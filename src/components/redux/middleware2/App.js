@@ -23,9 +23,9 @@ class App extends Component {
     render() {
         return (
             <ul>
-                {store
-                    .getState()
-                    .map(item => <li key={item.id}>{item.title}</li>)}
+                {
+                    store.getState().map(item => <li key={item.id}>{item.title}</li>)
+                }
             </ul>
         )
     }

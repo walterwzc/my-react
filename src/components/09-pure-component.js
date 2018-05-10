@@ -13,7 +13,7 @@ class Parent extends Component {
     changeState() {
         this.setState({
             title: Math.random()
-        });
+        })
     }
 
     render() {

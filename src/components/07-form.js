@@ -1,34 +1,45 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 class Form extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      message: 'aaa'
+    constructor(props) {
+        super(props)
+        this.state = {
+            message: 'aaa'
+        }
     }
-  }
 
-  handleChange(e) {
-    this.setState({
-      message: e.target.value
-    })
-  }
+    handleChange(e) {
+        this.setState({
+            message: e.target.value
+        })
+    }
 
-  componentDidMount() {
-    setTimeout(() => {
-      console.log(this.refs.aaa.innerHTML);
-    }, 4000)
-  }
+    componentDidMount() {
+        setTimeout(() => {
+            console.log(this.refs.fatherDiv.innerHTML)
+        }, 3000)
+    }
 
-  render() {
-    return (
-      <div ref="aaa">
-        <input type="text" value={this.state.message} onChange={this.handleChange.bind(this)} />
-        <input type="text" ref='test' />
-        <div>{this.state.message}</div>
-      </div>
-    )
-  }
+    refHandleChange() {
+        console.log(this.refs.inputRef.value);
+    }
+
+    render() {
+        return (
+            <div ref="fatherDiv">
+                {/* 受控组件 */}
+                <input
+                    type="text"
+                    value={this.state.message}
+                    onChange={this.handleChange.bind(this)}
+                />
+
+                {/* 非受控组件 */}
+                <input type="text" ref="inputRef" onChange={this.refHandleChange.bind(this)}/>
+                <div>{this.state.message}</div>
+            </div>
+        )
+    }
 }
 
 export default Form

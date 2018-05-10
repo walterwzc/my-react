@@ -29,10 +29,10 @@ const commentsReducer = (state = [], action) => {
 }
 
 const mainReducer = (state = {}, action) => {
-  return {
-    posts: postsReducer(state.posts, action),
-    comments: commentsReducer(state.comments, action)
-  }
+    return {
+        posts: postsReducer(state.posts, action),
+        comments: commentsReducer(state.comments, action)
+    }
 }
 
 // const mainReducer = combineReducers({
@@ -57,8 +57,8 @@ store.dispatch({
 
 store.dispatch({
     type: 'ADD_COMMENT',
-    payload: {id: 1, postId: 1, content: 'nice ~'}
-});
+    payload: { id: 1, postId: 1, content: 'nice ~' }
+})
 
 export default () => {
     return null

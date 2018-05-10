@@ -61,7 +61,6 @@ const Posts = connect(mapStateToProps, mapDispatchToProps)(PostList)
 //     }
 // }
 
-
 // Posts.contextTypes = {
 //     store: PropTypes.object
 // }
