@@ -39,7 +39,7 @@ class FormBoxComponent extends Component {
 
                 {/* 向子组件传递一个 type 为 submit 属性 */}
                 <Button
-                    text="Send"
+                    text="提交"
                     onButttonClick={() => this.handleSubmit()}
                     type="submit"
                 />

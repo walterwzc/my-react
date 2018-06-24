@@ -1,0 +1,21 @@
+.pagination {
+    float: right;
+    margin-bottom: 100px;
+}
+
+.pagination > li {
+    width: 60px;
+    height: 40px;
+    line-height: 40px;
+    background: #ddd;
+    display: inline-block;
+    margin-right: 5px;
+    margin-top: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pagination > li.activePage {
+    background: #f00;
+    color: #fff;
+}

@@ -7,14 +7,13 @@ class Button extends Component {
 
     // 在子组件之中调用 父组件的方法。
     handleClick() {
-        if (this.props.type === 'submit') {
+        if (this.props.type == 'submit') {
             this.props.onButttonClick()
-        } else if (this.props.type === 'delete') {
-            this.props.onDeleteClick()
         }
     }
 
     render() {
+        console.log('ButtonComponent -> render')
         return (
             <button onClick={() => this.handleClick()}>
                 {this.props.text}
