@@ -10,21 +10,38 @@ class Pagination extends Component {
             pageTotalCount: 3
         }
     }
+    changePage = () => {
+        
+    }
     render() {
         console.log('Pagination -> render')
         let that = this
-        console.log(that.props.pageInfo)
+        console.log(that.props)
         return (
             <ul className="pagination">
-            {
-                (function() {
+                {(function() {
                     let pageLiArr = []
-                    for (let index = 0; index < that.props.pageInfo.movieTotalCount; index++) {
-                        pageLiArr.push(<li className={index === that.props.pageInfo.moviePageStart ? "activePage" : ""} key={index + 1}>{index + 1}</li>)
+                    for (
+                        let index = 0;
+                        index < that.props.pageInfo.pageTotalCount;
+                        index++
+                    ) {
+                        pageLiArr.push(
+                            <li
+                                className={
+                                    index === that.props.pageInfo.moviePageStart
+                                        ? 'activePage'
+                                        : ''
+                                }
+                                key={index + 1}
+                                onClick={this.changePage}
+                            >
+                                {index + 1}
+                            </li>
+                        )
                     }
                     return pageLiArr
-                })()
-            }
+                })()}
             </ul>
         )
     }

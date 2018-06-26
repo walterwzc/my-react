@@ -11,37 +11,40 @@ class CommentListComponent extends Component {
         }
     }
 
-    loadData(pageCount) {
+    loadDataAndRender(pageCount) {
         console.log('loadData')
-        return axios({
+        axios({
             url: `/api/v2/movie/top250?count=${pageCount}`
+        }).then(result => {
+            console.log('movie result:')
+            console.log(result)
+            const list = result.data.subjects.map((value, index) => {
+                return <CommentItemComponent message={value} key={value.id} />
+            })
+            this.setState({
+                commentList: list,
+            })
+            this.props.setPageInfo({
+                // 一页多少电影
+                moviePageCount: result.data.count,
+                // 当前页
+                moviePageStart: result.data.start,
+                // 总页数
+                pageTotalCount: Math.ceil(result.data.total / result.data.count)
+            })
         })
     }
 
     componentDidMount() {
         console.log('CommentListComponent -> componentDidMount')
-        this.loadData(this.props.moviePageCount)
-            .then(result => {
-                console.log('result')
-                console.log(result)
-                const list = result.data.subjects.map((value, index) => {
-                    return <CommentItemComponent message={value} key={value.id} />
-                })
-                this.setState({
-                    commentList: list,
-                })
-                this.props.setPageInfo({
-                    moviePageCount: result.data.count,
-                    moviePageStart: result.data.start,
-                    movieTotalCount: Math.ceil(result.data.total / result.data.count)
-                })
-            })
+        this.loadDataAndRender(this.props.moviePageCount)
+            
     }
 
     componentWillReceiveProps(newProps) {
-        console.log('newProps: ')
+        console.log('CommentListComponent -> newProps: ')
         console.log(newProps)
-        // this.loadData(newProps.moviePageCount)
+        this.loadDataAndRender(newProps.moviePageCount)
     }
 
     // shouldComponentUpdate (nextProp, nextState) {
