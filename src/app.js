@@ -7,7 +7,7 @@ import './styles/app.scss'
 
 // import App from './components/redux/01-basic'
 
-// import App from './components/redux/02-combinReducer'
+import App from './components/redux/02-combinReducer'
 
 // import App from './components/06-comment/CommentBoxComponent'
 
@@ -23,7 +23,7 @@ import './styles/app.scss'
 
 // import App from './components/redux/middleware/App'
 
-import App from './components/redux/react-redux/components/App'
+// import App from './components/redux/react-redux/components/App'
 
 // import App from './components/router/03-nest';
 

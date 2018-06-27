@@ -28,6 +28,7 @@ const commentsReducer = (state = [], action) => {
     }
 }
 
+// 效果等同于 combineReducers
 const mainReducer = (state = {}, action) => {
     return {
         posts: postsReducer(state.posts, action),
@@ -59,6 +60,14 @@ store.dispatch({
     type: 'ADD_COMMENT',
     payload: { id: 1, postId: 1, content: 'nice ~' }
 })
+
+console.log('--------------------------------')
+
+console.log(store.getState().posts)
+
+console.log('================================')
+
+console.log(store.getState().comments)
 
 export default () => {
     return null
