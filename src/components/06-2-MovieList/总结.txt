@@ -1,0 +1,2 @@
+
+两次卡的时间比较久的都是，每页显示多少电影，当前Pagination显示的页码在第几页，这样的状态上传至最顶层的组件CommentBoxComponent，先保存在 CommentBoxComponent 的state之中，之后在向下传至 CommentListComponent 来发起ajax请求，这里出的问题最多，也不好理解；渲染完成之后state或者是props的更改再进行的重新渲染，就要依靠 componentWillReceiveProps 或者 shouldComponentUpdate 来进行，一方面子组件的状态要传给父组件，父组件会重新渲染，这样会导致子组件重新进行渲染。这样在父组件之中写好shouldComponentUpdate就很关键。
