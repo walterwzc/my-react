@@ -11,10 +11,10 @@ class CommentListComponent extends Component {
         }
     }
 
-    loadDataAndRender(pageCount) {
+    loadDataAndRender(pageCount, startPage) {
         console.log('loadData')
         axios({
-            url: `/api/v2/movie/top250?count=${pageCount}`
+            url: `/api/v2/movie/top250?count=${pageCount}&start=${startPage}`
         }).then(result => {
             console.log('movie result:')
             console.log(result)
@@ -27,8 +27,6 @@ class CommentListComponent extends Component {
             this.props.setPageInfo({
                 // 一页多少电影
                 moviePageCount: result.data.count,
-                // 当前页
-                moviePageStart: result.data.start,
                 // 总页数
                 pageTotalCount: Math.ceil(result.data.total / result.data.count)
             })
@@ -37,25 +35,19 @@ class CommentListComponent extends Component {
 
     componentDidMount() {
         console.log('CommentListComponent -> componentDidMount')
-        this.loadDataAndRender(this.props.moviePageCount)
-            
+        console.log(this.props.moviePageCount, this.props.movieCurrentPage)
+        const moviePageCount = this.props.moviePageCount
+        const movieCurrentPage = this.props.movieCurrentPage
+        this.loadDataAndRender(this.props.moviePageCount, moviePageCount * movieCurrentPage)
     }
 
     componentWillReceiveProps(newProps) {
         console.log('CommentListComponent -> newProps: ')
-        console.log(newProps)
-        this.loadDataAndRender(newProps.moviePageCount)
+        console.log(newProps.moviePageCount, newProps.movieCurrentPage)
+        const moviePageCount = newProps.moviePageCount
+        const movieCurrentPage = newProps.movieCurrentPage
+        this.loadDataAndRender(newProps.moviePageCount, moviePageCount * movieCurrentPage)
     }
-
-    // shouldComponentUpdate (nextProp, nextState) {
-    //     console.log(this.props.moviePageCount, nextProp.moviePageCount)
-    //     if (this.props.moviePageCount !== nextProp.moviePageCount) {
-    //         console.log('shouldComponentUpdate return true')
-    //         return true
-    //     }
-    //     console.log('shouldComponentUpdate return false')
-    //     return false
-    // }
 
     render() {
         console.log('CommentListComponent -> render')

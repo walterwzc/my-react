@@ -10,8 +10,8 @@ class Pagination extends Component {
             pageTotalCount: 3
         }
     }
-    changePage = () => {
-        
+    changePage = (currentPage) => {
+        this.props.handleMovieCurrentPageChange(currentPage)
     }
     render() {
         console.log('Pagination -> render')
@@ -29,12 +29,14 @@ class Pagination extends Component {
                         pageLiArr.push(
                             <li
                                 className={
-                                    index === that.props.pageInfo.moviePageStart
+                                    index === that.props.movieCurrentPage
                                         ? 'activePage'
                                         : ''
                                 }
                                 key={index + 1}
-                                onClick={this.changePage}
+                                onClick={() => {
+                                    that.changePage(index)
+                                }}
                             >
                                 {index + 1}
                             </li>

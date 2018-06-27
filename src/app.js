@@ -11,7 +11,7 @@ import './styles/app.scss'
 
 // import App from './components/06-comment/CommentBoxComponent'
 
-import App from './components/06-2-MovieList/CommentBoxComponent'
+// import App from './components/06-2-MovieList/CommentBoxComponent'
 
 // import App from './components/07-form'
 
@@ -23,7 +23,7 @@ import App from './components/06-2-MovieList/CommentBoxComponent'
 
 // import App from './components/redux/middleware/App'
 
-// import App from './components/redux/react-redux/components/App'
+import App from './components/redux/react-redux/components/App'
 
 // import App from './components/router/03-nest';
 

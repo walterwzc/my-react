@@ -11,11 +11,8 @@ class CommentBoxComponent extends React.Component {
         this.state = {
             // 一页几部电影，由select来控制
             moviePageCount: 10,
+            movieCurrentPage: 0,
             pageInfo: {
-                // 分页从第几页开始
-                moviePageCount: 0,
-                // 一共多少电影
-                moviePageStart: 0,
                 // 一共有多少页
                 pageTotalCount: 0
             }
@@ -26,14 +23,11 @@ class CommentBoxComponent extends React.Component {
             moviePageCount: pageCount
         })
     }
-    // handleMovieCurrentPageChange = (currentPage) => {
-    //     this.setState({
-    //         movieCurrentPage: currentPage
-    //     })
-    // }
-    // moviePageCount: result.data.count,
-    // moviePageStart: result.data.start,
-    // pageTotalCount: Math.ceil(result.data.total / result.data.count)
+    handleMovieCurrentPageChange = (currentPage) => {
+        this.setState({
+            movieCurrentPage: currentPage
+        })
+    }
     setPageInfo = (pageInfo) => {
         this.setState({
             pageInfo: Object.assign({}, this.state.pageInfo, pageInfo)
@@ -42,21 +36,16 @@ class CommentBoxComponent extends React.Component {
     shouldComponentUpdate(nextProp, nextState) {
         if (this.state.moviePageCount !== nextState.moviePageCount) {
             console.log('this.state.moviePageCount !== nextState.moviePageCount')
+            console.log(this.state.moviePageCount, nextState.moviePageCount)
             return true
         }
-        // if (this.state.moviePageCount === nextState.moviePageCount) {
-        //     console.log('false1')
-        //     return false
-        // }
-        // if (this.state.movieCurrentPage === nextState.movieCurrentPage) {
-        //     console.log('false2')
-        //     return false
-        // }
-        console.log(this.props, nextProp)
+        if (this.state.movieCurrentPage !== nextState.movieCurrentPage) {
+            console.log('this.state.movieCurrentPage !== nextState.movieCurrentPage')
+            console.log(this.state.movieCurrentPage, nextState.movieCurrentPage)
+            return true
+        }
         console.log(this.state, nextState)
-        if (this.state.pageInfo.moviePageCount === nextState.pageInfo.moviePageCount 
-            && this.state.pageInfo.moviePageStart === nextState.pageInfo.moviePageStart
-            && this.state.pageInfo.pageTotalCount === nextState.pageInfo.pageTotalCount) {
+        if (this.state.pageInfo.pageTotalCount === nextState.pageInfo.pageTotalCount) {
             console.log('return false3')
             return false
         }
@@ -71,6 +60,7 @@ class CommentBoxComponent extends React.Component {
                 <hr />
                 <CommentListComponent 
                     moviePageCount = {this.state.moviePageCount}
+                    movieCurrentPage = {this.state.movieCurrentPage}
                     setPageInfo = {this.setPageInfo}
                 />
                 <PageCount 
@@ -79,6 +69,7 @@ class CommentBoxComponent extends React.Component {
                 />
                 <Pagination
                     pageInfo = {this.state.pageInfo}
+                    movieCurrentPage = {this.state.movieCurrentPage}
                     handleMovieCurrentPageChange = {this.handleMovieCurrentPageChange}
                 />
             </div>

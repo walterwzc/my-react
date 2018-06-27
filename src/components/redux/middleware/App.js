@@ -13,6 +13,7 @@ const store = createStore(moiveReducer, applyMiddleware(thunk))
 class App extends Component {
     constructor(props) {
         super(props)
+        store.subscribe(() => this.forceUpdate())
     }
 
     showLoading(type) {
@@ -45,8 +46,6 @@ class App extends Component {
     }
 
     componentDidMount() {
-        store.subscribe(() => this.forceUpdate())
-
         // return type: loading
         store.dispatch(this.showLoading('LOADING'))
         store.dispatch(this.fetchData())
