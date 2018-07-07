@@ -5,7 +5,6 @@ const postsReducer = (state = [], action) => {
         case 'ADD_POST':
             return [...state, { ...action.payload }]
         case 'DELETE_POST':
-
             // 删除 POST 的方法
             return state.filter(item => {
                 return action.id != item.id

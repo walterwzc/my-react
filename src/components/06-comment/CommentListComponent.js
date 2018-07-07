@@ -1,20 +1,19 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 
 import CommentItemComponent from './CommentItemComponent'
 
-// const dataSource = [
-//   {
-//     _id: '001',
-//     name: 'Nate',
-//     title: 'this is a great article'
-//   },
-//   {
-//     _id: '002',
-//     name: 'Jiazhi',
-//     title: 'this is a perfect article'
-//   }
-// ]
+const dataSource = [
+    {
+        id: '001',
+        name: 'Nate',
+        title: 'this is a great article'
+    },
+    {
+        id: '002',
+        name: 'Jiazhi',
+        title: 'this is a perfect article'
+    }
+]
 
 class CommentListComponent extends Component {
     constructor(props) {
@@ -25,48 +24,50 @@ class CommentListComponent extends Component {
     }
 
     loadData() {
-        // dataSource.map((value, index) => {
-        //   return <CommentItemComponent message={value} key={value._id} />
-        // })
-        return axios({
-            url: '/api/v2/movie/top250'
+        return dataSource.map((item, index) => {
+            return <CommentItemComponent 
+                        message={item} 
+                        key={item.id} 
+                        deleteCommentItem={this.handleDeleteCommentItem} 
+                    />
+        })
+    }
+
+    handleDeleteCommentItem = (itemId) => {
+        console.log('handleDeleteCommentItem')
+        this.setState({
+            commentList: this.state.commentList.filter((commentItem) => {
+                return commentItem.key != itemId
+            })
+        }, () => {
+            console.log('------')
+            console.log(this.state.commentList)
         })
     }
 
     componentWillMount() {
-        this.loadData().then(result => {
-            const list = result.data.subjects.map((value, index) => {
-                return <CommentItemComponent message={value} key={value.id} />
-            })
-            this.state.commentList.push(list)
-            this.setState({})
-            // this.setState({
-            //   commentList: list
-            // })
+        let initCommentList = this.loadData()
+        this.setState({
+            commentList: [...this.state.commentList, ...initCommentList]
         })
     }
-
-    // componentDidMount() {
-    //   this.setState({
-    //     commentList: this.state.commentList
-    //   })
-    // }
 
     componentWillReceiveProps(newProps) {
         this.state.commentList.push(
             <CommentItemComponent
                 message={{
                     id: new Date().getTime(),
-                    year: 'zhichao',
+                    name: 'zhichao',
                     title: newProps.message
                 }}
                 key={new Date().getTime()}
+                deleteCommentItem={this.handleDeleteCommentItem}
             />
         )
     }
 
     render() {
-        console.log('CommentListComponent render()');
+        console.log('CommentListComponent  ->  render')
         return (
             <div className="list">
                 <ul>{this.state.commentList}</ul>
