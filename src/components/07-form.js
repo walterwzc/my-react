@@ -24,7 +24,10 @@ class Form extends Component {
         console.log(this.refs.inputRef.value);
     }
 
+
+
     render() {
+
         return (
             <div ref="fatherDiv">
                 {/* 受控组件 */}

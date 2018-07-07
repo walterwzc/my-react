@@ -12,7 +12,7 @@ class Counter extends Component {
             <p>
                 被点击了 { count } 次
                 {' '}
-                <button onClick={ onIncrement }> + </button>
+                <button onClick={ () => onIncrement() }> + </button>
                 {' '}
                 <button onClick={ onDecrement }> - </button>
             </p>
